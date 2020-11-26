@@ -6,4 +6,7 @@ Repository for training purpose.
 2. Add swagger configuration to project.
 3. Create mock data for basic collection operations.
 4. Use sorting on collection.
+5. Added rest controllers for sorting and filtering.(Needs some rearramgents amd exception handling)
+6. Created Git repository and linked with intellij.
+7. Getting used to IDE (Recursive task).
 
