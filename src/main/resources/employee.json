@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "name": "James",
+    "salary": 200000,
+    "age": 21,
+    "gender": "Male"
+  },
+  {
+    "id": 2,
+    "name": "Bob",
+    "salary": 210000,
+    "age": 24,
+    "gender": "Male"
+  },
+  {
+    "id": 3,
+    "name": "Kate",
+    "salary": 300000,
+    "age": 29,
+    "gender": "Female"
+  },
+  {
+    "id": 4,
+    "name": "John",
+    "salary": 290000,
+    "age": 30,
+    "gender": "Male"
+  },
+  {
+    "id": 5,
+    "name": "Tim",
+    "salary": 900000,
+    "age": 45,
+    "gender": "Male"
+  },
+  {
+    "id": 6,
+    "name": "Merry",
+    "salary": 800000,
+    "age": 42,
+    "gender": "Female"
+  },
+  {
+    "id": 7,
+    "name": "Roxanne",
+    "salary": 600000,
+    "age": 35,
+    "gender": "Female"
+  },
+  {
+    "id": 8,
+    "name": "Melina",
+    "salary": 500000,
+    "age": 37,
+    "gender": "Female"
+  },
+  {
+    "id": 9,
+    "name": "Jimmy",
+    "salary": 500000,
+    "age": 33,
+    "gender": "Male"
+  },
+  {
+    "id": 10,
+    "name": "Mark",
+    "salary": 400000,
+    "age": 38,
+    "gender": "Male"
+  },
+  {
+    "id": 11,
+    "name": "Bob",
+    "salary": 800000,
+    "age": 42,
+    "gender": "Male"
+  },
+  {
+    "id": 12,
+    "name": "Tom",
+    "salary": 1500000,
+    "age": 52,
+    "gender": "Male"
+  },
+  {
+    "id": 13,
+    "name": "Joey",
+    "salary": 400000,
+    "age": 36,
+    "gender": "Male"
+  },
+  {
+    "id": 14,
+    "name": "Nancy",
+    "salary": 250000,
+    "age": 33,
+    "gender": "Female"
+  },
+  {
+    "id": 15,
+    "name": "Jessica",
+    "salary": 300000,
+    "age": 27,
+    "gender": "Female"
+  }
+]
