@@ -1,6 +1,7 @@
 package com.copious.training.controller;
 
 
+import com.copious.training.exceptions.EmployeeNotFoundException;
 import com.copious.training.model.Employee;
 import com.copious.training.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,14 +23,8 @@ public class EmployeeController {
     EmployeeService employeeService;
 
     @GetMapping("/get-employees")
-    public ResponseEntity<List<Employee>> getEmployee() {
-        List<Employee> empList = new ArrayList<>();
-
-        try {
-            empList = employeeService.sortByAge();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public ResponseEntity<List<Employee>> getEmployee() throws EmployeeNotFoundException {
+        List<Employee> empList = employeeService.sortByAge();
 
         return new ResponseEntity<>(empList, HttpStatus.OK);
     }
@@ -36,7 +32,7 @@ public class EmployeeController {
     @PostMapping("/emp-filter")
     public ResponseEntity<List<Employee>> getEmployee(@RequestParam("lowerAgeLimit") int lowerAgeLimit,
                                                       @RequestParam("upperAgeLimit") int upperAgeLimit,
-                                                      @RequestParam("gender") String gender) {
+                                                      @RequestParam("gender") String gender) throws EmployeeNotFoundException {
         List<Employee> empList = new ArrayList<>();
 
         try {
