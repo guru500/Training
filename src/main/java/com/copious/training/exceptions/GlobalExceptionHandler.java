@@ -21,4 +21,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<Object>(message, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(ParsingConfigException.class)
+    @ResponseBody
+    public ResponseEntity<Object> handleXmlParsingException(ParsingConfigException ex) {
+
+        ErrorMessage message = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage(), LocalDateTime.now());
+
+        return new ResponseEntity<Object>(message, HttpStatus.NOT_FOUND);
+    }
 }

@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "key": "spring.datasource.username",
+    "value": "user"
+  },
+  {
+    "id": 2,
+    "key": "spring.datasource.password",
+    "value": "password"
+  },
+  {
+    "id": 3,
+    "key": "spring.jpa.properties.hibernate.dialect",
+    "value": "org.hibernate.dialect.SQLServer2012Dialect"
+  },
+  {
+    "id": 4,
+    "key": "spring.datasource.driver-class-name",
+    "value": "com.microsoft.sqlserver.jdbc.SQLServerDriver"
+  },
+  {
+    "id": 5,
+    "key": "spring.datasource.url",
+    "value": "jdbc:sqlserver://localhost:1433;database=my_db"
+  },
+  {
+    "id": 6,
+    "key": "spring.jpa.hibernate.naming.physical-strategy",
+    "value": "org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"
+  }
+]

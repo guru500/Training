@@ -1,13 +1,12 @@
 package com.copious.training;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.Test;
 
-@SpringBootTest
-class TrainingApplicationTests {
+public class TrainingApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+    @Test
+    public void  simpleTest() {
+        assert (true);
+    }
 
 }

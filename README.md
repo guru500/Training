@@ -16,15 +16,13 @@ Repository for training purpose.
 3. Design patterns singleton and factory understanding.
 4. Design patterns with lambda.
 
-
-#### Planned :
 #02 Dec 2020
 1. Use Properties class.
 2. Collections advance features.
 3. Mockito : write sample case.
 4. Expand project scope to cover collections in detail.
 
-
+#### Planned :
 #03 Dec 2020
 1. Write test cases using Mockito.
 2. Singleton, Factory and prototype pattern implementation.

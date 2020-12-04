@@ -29,18 +29,13 @@ public class EmployeeController {
         return new ResponseEntity<>(empList, HttpStatus.OK);
     }
 
+
     @PostMapping("/emp-filter")
     public ResponseEntity<List<Employee>> getEmployee(@RequestParam("lowerAgeLimit") int lowerAgeLimit,
                                                       @RequestParam("upperAgeLimit") int upperAgeLimit,
                                                       @RequestParam("gender") String gender) throws EmployeeNotFoundException {
-        List<Employee> empList = new ArrayList<>();
 
-        try {
-            empList = employeeService.sortByAge();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        List<Employee> empList = employeeService.sortByAge();
         return new ResponseEntity<>(empList, HttpStatus.OK);
     }
 }
