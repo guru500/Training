@@ -1,8 +1,10 @@
 package com.copious.training.service;
 
 import com.copious.training.exceptions.EmployeeNotFoundException;
+import com.copious.training.factory.EmployeeFactory;
 import com.copious.training.model.Employee;
 import com.copious.training.repository.EmployeeDaoImpl;
+import com.copious.training.util.FilterCriteria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
     EmployeeDaoImpl employeeDao;
+
+    @Autowired
+    EmployeeFactory employeeFactory;
 
     @Override
     public List<Employee> sortByAge() throws EmployeeNotFoundException {
@@ -34,5 +39,10 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 
         return employeeList;
+    }
+
+    @Override
+    public List<Employee> genderFilter(FilterCriteria criteria) {
+        return employeeFactory.employeeFilter(criteria).getEmployees(employeeDao.getEmployees());
     }
 }
