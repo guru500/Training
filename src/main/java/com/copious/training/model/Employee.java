@@ -1,7 +1,5 @@
 package com.copious.training.model;
 
-import org.apache.tomcat.jni.Local;
-
 import java.time.LocalDate;
 
 public class Employee {
@@ -12,6 +10,19 @@ public class Employee {
     private int age;
     private LocalDate dob;
     private String gender;
+
+    public Employee() {
+        super();
+    }
+
+    public Employee(int id, String name, long salary, int age, LocalDate dob, String gender) {
+        this.id = id;
+        this.name = name;
+        this.salary = salary;
+        this.age = age;
+        this.dob = dob;
+        this.gender = gender;
+    }
 
     public int getId() {
         return id;

@@ -31,9 +31,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
-    public List<Employee> filterEmployee(int lowerAgeLimit, int upperAgeLimit, String gender) throws EmployeeNotFoundException {
+    public List<Employee> filterEmployee(int lowerAgeLimit, int upperAgeLimit, FilterCriteria gender) throws EmployeeNotFoundException {
         Predicate<Employee> agePredicate = age -> age.getAge() > lowerAgeLimit && age.getAge() < upperAgeLimit;
-        Predicate<Employee> genderPredicate = gen -> gen.getGender().equalsIgnoreCase(gender);
+        Predicate<Employee> genderPredicate = gen -> gen.getGender().equalsIgnoreCase(String.valueOf(gender));
         List<Employee> employeeList =
                 employeeDao.getEmployees().stream().filter(agePredicate.and(genderPredicate)).collect(Collectors.toList());
 

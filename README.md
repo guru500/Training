@@ -22,9 +22,12 @@ Repository for training purpose.
 3. Mockito : write sample case.
 4. Expand project scope to cover collections in detail.
 
-#### Planned :
 #03 Dec 2020
-1. Write test cases using Mockito.
-2. Singleton, Factory and prototype pattern implementation.
+1. Factory pattern implementation.
+2. Try with resources.
+3. Singleton pattern in java vs spring singleton scope.
+4. Scheduler and LoacalDateTime implementation for birthday wish to emplyees.
 
-
+#4 Dec 2020
+1. Writing test cases for services using Mockito.
+2. Understanding mockito and challenges with parameterized tests.
