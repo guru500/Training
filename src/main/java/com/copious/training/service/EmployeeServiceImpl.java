@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -17,15 +18,23 @@ import java.util.stream.Collectors;
 public class EmployeeServiceImpl implements EmployeeService {
 
     @Autowired
-    EmployeeDaoImpl employeeDao;
+    private EmployeeDaoImpl employeeDao;
 
     @Autowired
-    EmployeeFactory employeeFactory;
+    private EmployeeFactory employeeFactory;
 
     @Override
     public List<Employee> sortByAge() throws EmployeeNotFoundException {
         List<Employee> employees =
                 employeeDao.getEmployees().stream().sorted(Comparator.comparing(Employee::getAge)).collect(Collectors.toList());
+
+        return employees;
+    }
+
+    @Override
+    public Optional<Employee> getUserByUserName(String userName) throws EmployeeNotFoundException {
+        Optional<Employee> employees =
+                employeeDao.getEmployees().stream().filter(employee -> employee.getUserName().equalsIgnoreCase(userName)).findAny();
 
         return employees;
     }

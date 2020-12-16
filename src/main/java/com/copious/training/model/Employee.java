@@ -1,5 +1,6 @@
 package com.copious.training.model;
 
+import java.beans.Transient;
 import java.time.LocalDate;
 
 public class Employee {
@@ -10,6 +11,9 @@ public class Employee {
     private int age;
     private LocalDate dob;
     private String gender;
+    private String userName;
+    private String password;
+    private String jwtToken;
 
     public Employee() {
         super();
@@ -70,5 +74,29 @@ public class Employee {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getJwtToken() {
+        return jwtToken;
+    }
+
+    public void setJwtToken(String jwtToken) {
+        this.jwtToken = jwtToken;
     }
 }

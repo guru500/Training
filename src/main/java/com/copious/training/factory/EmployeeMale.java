@@ -2,7 +2,6 @@ package com.copious.training.factory;
 
 import com.copious.training.model.Employee;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -1,13 +1,11 @@
 package com.copious.training.scheduler;
 
-import com.copious.training.model.Employee;
 import com.copious.training.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.function.Predicate;
 
 @Component
 public class BirthdayWishScheduler {

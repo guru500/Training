@@ -1,30 +1,28 @@
 package com.copious.training.exceptions;
 
+import org.springframework.http.HttpStatus;
+
 import java.time.LocalDateTime;
 
 public class ErrorMessage {
 
-    private int errorCode;
+    private HttpStatus errorCode;
 
     private String errorMessage;
 
     private LocalDateTime timestamp;
 
-    public ErrorMessage(int errorCode, String errorMessage, LocalDateTime timestamp) {
+    public ErrorMessage(HttpStatus errorCode, String errorMessage, LocalDateTime timestamp) {
         this.errorCode = errorCode;
         this.errorMessage = errorMessage;
         this.timestamp = timestamp;
     }
 
-    public ErrorMessage() {
-        super();
-    }
-
-    public int getErrorCode() {
+    public HttpStatus getErrorCode() {
         return errorCode;
     }
 
-    public void setErrorCode(int errorCode) {
+    public void setErrorCode(HttpStatus errorCode) {
         this.errorCode = errorCode;
     }
 

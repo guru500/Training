@@ -4,119 +4,149 @@
     "name": "James",
     "salary": 200000,
     "age": 21,
-    "dob" : "1954-02-20",
-    "gender": "Male"
+    "dob": "1954-02-20",
+    "gender": "Male",
+    "userName": "james",
+    "password": "password"
   },
   {
     "id": 2,
     "name": "Bob",
     "salary": 210000,
     "age": 24,
-    "dob" : "1978-02-27",
-    "gender": "Male"
+    "dob": "1978-02-27",
+    "gender": "Male",
+    "userName": "bob",
+    "password": "password"
   },
   {
     "id": 3,
     "name": "Kate",
     "salary": 300000,
     "age": 29,
-    "dob" : "1969-08-12",
-    "gender": "Female"
+    "dob": "1969-08-12",
+    "gender": "Female",
+    "userName": "kate",
+    "password": "password"
   },
   {
     "id": 4,
     "name": "John",
     "salary": 290000,
     "age": 30,
-    "dob" : "1989-07-15",
-    "gender": "Male"
+    "dob": "1989-07-15",
+    "gender": "Male",
+    "userName": "john",
+    "password": "password"
   },
   {
     "id": 5,
     "name": "Tim",
     "salary": 900000,
     "age": 45,
-    "dob" : "1991-01-10",
-    "gender": "Male"
+    "dob": "1991-01-10",
+    "gender": "Male",
+    "userName": "tim",
+    "password": "password"
   },
   {
     "id": 6,
     "name": "Merry",
     "salary": 800000,
     "age": 42,
-    "dob" : "1977-09-06",
-    "gender": "Female"
+    "dob": "1977-09-06",
+    "gender": "Female",
+    "userName": "merry",
+    "password": "password"
   },
   {
     "id": 7,
     "name": "Roxanne",
     "salary": 600000,
     "age": 35,
-    "dob" : "1988-12-17",
-    "gender": "Female"
+    "dob": "1988-12-17",
+    "gender": "Female",
+    "userName": "roxanne",
+    "password": "password"
   },
   {
     "id": 8,
     "name": "Melina",
     "salary": 500000,
     "age": 37,
-    "dob" : "1988-05-29",
-    "gender": "Female"
+    "dob": "1988-05-29",
+    "gender": "Female",
+    "userName": "melina",
+    "password": "password"
   },
   {
     "id": 9,
     "name": "Jimmy",
     "salary": 500000,
     "age": 33,
-    "dob" : "1992-02-22",
-    "gender": "Male"
+    "dob": "1992-02-22",
+    "gender": "Male",
+    "userName": "jimmy",
+    "password": "password"
   },
   {
     "id": 10,
     "name": "Mark",
     "salary": 400000,
     "age": 38,
-    "dob" : "1977-01-27",
-    "gender": "Male"
+    "dob": "1977-01-27",
+    "gender": "Male",
+    "userName": "mark",
+    "password": "password"
   },
   {
     "id": 11,
     "name": "Bob",
     "salary": 800000,
     "age": 42,
-    "dob" : "1988-07-23",
-    "gender": "Male"
+    "dob": "1988-07-23",
+    "gender": "Male",
+    "userName": "bob_23",
+    "password": "password"
   },
   {
     "id": 12,
     "name": "Tom",
     "salary": 1500000,
     "age": 52,
-    "dob" : "1990-11-26",
-    "gender": "Male"
+    "dob": "1990-11-26",
+    "gender": "Male",
+    "userName": "tom_26",
+    "password": "password"
   },
   {
     "id": 13,
     "name": "Joey",
     "salary": 400000,
     "age": 36,
-    "dob" : "1978-03-11",
-    "gender": "Male"
+    "dob": "1978-03-11",
+    "gender": "Male",
+    "userName": "joey",
+    "password": "password"
   },
   {
     "id": 14,
     "name": "Nancy",
     "salary": 250000,
     "age": 33,
-    "dob" : "1966-09-28",
-    "gender": "Female"
+    "dob": "1966-09-28",
+    "gender": "Female",
+    "userName": "nancy",
+    "password": "password"
   },
   {
     "id": 15,
     "name": "Jessica",
     "salary": 300000,
     "age": 27,
-    "dob" : "1993-12-04",
-    "gender": "Female"
+    "dob": "1993-12-04",
+    "gender": "Female",
+    "userName": "jessica",
+    "password": "password"
   }
 ]

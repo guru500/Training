@@ -2,8 +2,7 @@ package com.copious.training.repository;
 
 import com.copious.training.exceptions.EmployeeNotFoundException;
 import com.copious.training.model.Employee;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.copious.training.util.EnumExceptions;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +32,29 @@ public class EmployeeDaoImpl implements EmployeeDao {
         try {
             InputStream stream = resourceFile.getInputStream();
             BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-            Type listType = new TypeToken<ArrayList<Employee>>(){}.getType();
+            Type listType = new TypeToken<ArrayList<Employee>>() {
+            }.getType();
             List<Employee> empList = gson.fromJson(reader, listType);
 
             return empList;
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new EmployeeNotFoundException("Employee not found while reading JSON employee record");
+            throw new EmployeeNotFoundException(EnumExceptions.EMPLOYEE_NOT_FOUND_EXCEPTIONS);
+        }
+    }
+
+    @Override
+    public Employee findWhereUserNameEquals(String userName) throws EmployeeNotFoundException {
+        try {
+            InputStream stream = resourceFile.getInputStream();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+            Type listType = new TypeToken<ArrayList<Employee>>() {
+            }.getType();
+            List<Employee> empList = gson.fromJson(reader, listType);
+
+            Employee emp = empList.stream().filter(k -> k.getUserName().equalsIgnoreCase(userName)).findFirst().get();
+            return emp;
+        } catch (IOException e) {
+            throw new EmployeeNotFoundException(EnumExceptions.EMPLOYEE_NOT_FOUND_EXCEPTIONS);
         }
     }
 
