@@ -2,6 +2,7 @@ package com.copious.training.controller;
 
 
 import com.copious.training.exceptions.EmployeeNotFoundException;
+import com.copious.training.exceptions.GenericResponse;
 import com.copious.training.model.Employee;
 import com.copious.training.service.EmployeeService;
 import com.copious.training.util.FilterCriteria;
@@ -29,10 +30,11 @@ public class EmployeeController {
             @ApiResponse(code = 500, message = "Something went wrong, Internal server error")
     })
     @GetMapping("/get-employees")
-    public ResponseEntity<List<Employee>> getEmployee() throws EmployeeNotFoundException {
+    public ResponseEntity<GenericResponse<Object>> getEmployee() throws EmployeeNotFoundException {
         List<Employee> empList = employeeService.sortByAge();
 
-        return new ResponseEntity<>(empList, HttpStatus.OK);
+        return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(), employeeService.sortByAge()),
+                HttpStatus.OK);
     }
 
 
@@ -44,17 +46,18 @@ public class EmployeeController {
             @ApiResponse(code = 500, message = "Something went wrong, Internal server error")
     })
     @PostMapping("/emp-filter")
-    public ResponseEntity<List<Employee>> getEmployee(
+    public ResponseEntity<GenericResponse<Object>> getEmployee(
             @ApiParam(name = "lowerAgeLimit", value = "Lower age limit of employee.", required = true)
             @RequestParam("lowerAgeLimit") int lowerAgeLimit,
             @ApiParam(name = "upperAgeLimit", value = "Upper age limit of employee.", required = true)
             @RequestParam("upperAgeLimit") int upperAgeLimit,
             @ApiParam(name = "gender", value = "Gender of employee.", example =
                     "Male/Female", required = true)
-            @RequestParam("gender") String gender) throws EmployeeNotFoundException {
+            @RequestParam("gender") FilterCriteria gender) throws EmployeeNotFoundException {
 
-        List<Employee> empList = employeeService.sortByAge();
-        return new ResponseEntity<>(empList, HttpStatus.OK);
+        return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(),
+                employeeService.filterEmployee(lowerAgeLimit, upperAgeLimit, gender)),
+                HttpStatus.OK);
     }
 
     @ApiOperation(value = "Filter employee details.", notes = "Filter employees based on gender.", response =
@@ -65,11 +68,13 @@ public class EmployeeController {
             @ApiResponse(code = 500, message = "Something went wrong, Internal server error")
     })
     @PostMapping("/gender-filter")
-    public ResponseEntity<List<Employee>> genderFilter(
+    public ResponseEntity<GenericResponse<Object>> genderFilter(
             @ApiParam(name = "gender", type = "FilterCriteria", value = "Gender of employee.", example =
                     "Option Male/Female", required = true)
             @RequestParam("gender") FilterCriteria gender) throws EmployeeNotFoundException {
 
-        return new ResponseEntity<>(employeeService.genderFilter(gender), HttpStatus.OK);
+        return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(),
+                employeeService.genderFilter(gender)),
+                HttpStatus.OK);
     }
 }

@@ -1,50 +1,62 @@
 package com.copious.training.exceptions;
 
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.time.LocalDateTime;
 
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(EmployeeNotFoundException.class)
-    @ResponseBody
-    public ResponseEntity<Object> handleEmployeeNotFoundException(EmployeeNotFoundException ex) {
+    public ResponseEntity<Object> handleEmployeeNotFoundException(EmployeeNotFoundException ex, WebRequest request) {
 
-        ErrorMessage message = new ErrorMessage(ex.getErrorCode(), ex.getMessage(), LocalDateTime.now());
+        Response response = new Response();
+        response.setMessage(ex.getErrorMessage());
 
-        return new ResponseEntity<Object>(message, ex.getErrorCode());
+        GenericResponse<Response> genericResponse = new GenericResponse<>(false, ex.getErrorCode().name(), response);
+
+        return handleExceptionInternal(ex, genericResponse, new HttpHeaders(), ex.getErrorCode(), request);
     }
 
     @ExceptionHandler(ParsingConfigException.class)
-    @ResponseBody
-    public ResponseEntity<Object> handleXmlParsingException(ParsingConfigException ex) {
+    public ResponseEntity<Object> handleXmlParsingException(ParsingConfigException ex, WebRequest request) {
 
-        ErrorMessage message = new ErrorMessage(ex.getErrorCode(), ex.getErrorMessage(), LocalDateTime.now());
+        Response response = new Response();
+        response.setMessage(ex.getErrorMessage());
 
-        return new ResponseEntity<Object>(message, ex.getErrorCode());
+        GenericResponse<Response> genericResponse = new GenericResponse<>(false, ex.getErrorCode().name(), response);
+
+        return handleExceptionInternal(ex, genericResponse, new HttpHeaders(), ex.getErrorCode(), request);
     }
 
-    @ExceptionHandler(CredentialExcpetion.class)
-    @ResponseBody
-    public ResponseEntity<Object> handleCredentialException(CredentialExcpetion ex) {
+    @ExceptionHandler(CredentialException.class)
+    public ResponseEntity<Object> handleCredentialException(CredentialException ex, WebRequest request) {
 
-        ErrorMessage message = new ErrorMessage(ex.getErrorCode(), ex.getErrorMessage(), LocalDateTime.now());
+        Response response = new Response();
+        response.setMessage(ex.getErrorMessage());
+        response.setStatus(ex.getErrorCode().name());
 
-        return new ResponseEntity<Object>(message, ex.getErrorCode());
+        GenericResponse<Response> genericResponse = new GenericResponse<>(false, ex.getErrorCode().name(), response);
+
+        return handleExceptionInternal(ex, genericResponse, new HttpHeaders(), ex.getErrorCode(), request);
+
     }
+
 
     @ExceptionHandler(Exception.class)
-    @ResponseBody
-    public ResponseEntity<Object> handleException(Exception ex) {
+    public ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) {
 
-        ErrorMessage message = new ErrorMessage(HttpStatus.INTERNAL_SERVER_ERROR, ex.getMessage(), LocalDateTime.now());
+        Response response = new Response();
+        response.setMessage(ex.getMessage());
 
-        return new ResponseEntity<Object>(message, HttpStatus.NOT_FOUND);
+        GenericResponse<Response> genericResponse = new GenericResponse<>(false,
+                HttpStatus.INTERNAL_SERVER_ERROR.name(), response);
+
+        return handleExceptionInternal(ex, genericResponse, new HttpHeaders(),
+                HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 }

@@ -13,5 +13,7 @@ public interface EmployeeService {
 
     Optional<Employee> getUserByUserName(String userName) throws EmployeeNotFoundException;
 
+    List<Employee> filterEmployee(int lowerAgeLimit, int upperAgeLimit, FilterCriteria gender) throws EmployeeNotFoundException;
+
     List<Employee> genderFilter(FilterCriteria criteria);
 }

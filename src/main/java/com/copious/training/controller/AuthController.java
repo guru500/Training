@@ -1,7 +1,7 @@
 package com.copious.training.controller;
 
-import com.copious.training.exceptions.CredentialExcpetion;
-import com.copious.training.exceptions.EmployeeNotFoundException;
+import com.copious.training.exceptions.CredentialException;
+import com.copious.training.exceptions.GenericResponse;
 import com.copious.training.model.Employee;
 import com.copious.training.security.JwtServices;
 import com.copious.training.service.AppUserDetailsService;
@@ -9,6 +9,7 @@ import com.copious.training.service.EmployeeService;
 import com.copious.training.util.EnumExceptions;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,7 +32,6 @@ public class AuthController {
     @Autowired
     private JwtServices jwtServices;
 
-
     @ApiOperation(value = "Authenticate users.", notes = "Authenticate users and return jwt token.",
             response = Employee.class)
     @ApiResponses(value = {
@@ -41,7 +41,7 @@ public class AuthController {
             @ApiResponse(code = 500, message = "Something went wrong, Internal server error")
     })
     @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
-    public ResponseEntity<Employee> createAuthenticationToken(
+    public ResponseEntity<GenericResponse<Object>> createAuthenticationToken(
             @RequestParam(value = "userName") String userName,
             @RequestParam(value = "userPassword") String userPassword) {
 
@@ -52,14 +52,16 @@ public class AuthController {
                 Employee empDetails = new Employee();
                 final UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
                 final String jwt = jwtServices.generateToken(userDetails);
-                empDetails = employee.get();
-                empDetails.setJwtToken(jwt);
-                return new ResponseEntity<>(empDetails, HttpStatus.OK);
+                HttpHeaders responseHeader = new HttpHeaders();
+                responseHeader.set("jwt-token", jwt);
+
+                return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(), employee.get()),
+                        responseHeader, HttpStatus.OK);
             } else {
-                throw new CredentialExcpetion(EnumExceptions.INCORRECT_CREDENTIALS);
+                throw new CredentialException(EnumExceptions.INCORRECT_CREDENTIALS);
             }
         } else {
-            throw new CredentialExcpetion(EnumExceptions.USER_NOT_FOUND);
+            throw new CredentialException(EnumExceptions.USER_NOT_FOUND);
         }
     }
 }

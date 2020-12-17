@@ -40,6 +40,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
 
+    @Override
     public List<Employee> filterEmployee(int lowerAgeLimit, int upperAgeLimit, FilterCriteria gender) throws EmployeeNotFoundException {
         Predicate<Employee> agePredicate = age -> age.getAge() > lowerAgeLimit && age.getAge() < upperAgeLimit;
         Predicate<Employee> genderPredicate = gen -> gen.getGender().equalsIgnoreCase(String.valueOf(gender));
