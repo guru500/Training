@@ -1,6 +1,5 @@
 package com.copious.training.model;
 
-import java.beans.Transient;
 import java.time.LocalDate;
 
 public class Employee {

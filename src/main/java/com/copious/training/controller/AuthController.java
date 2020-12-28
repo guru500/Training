@@ -4,22 +4,23 @@ import com.copious.training.exceptions.CredentialException;
 import com.copious.training.exceptions.GenericResponse;
 import com.copious.training.model.Employee;
 import com.copious.training.security.JwtServices;
-import com.copious.training.service.AppUserDetailsService;
+import com.copious.training.service.EmpUserDetailsService;
 import com.copious.training.service.EmployeeService;
 import com.copious.training.util.EnumExceptions;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@CrossOrigin
 @Api(value = "Employee login control.")
 @RestController
 @RequestMapping("/login")
@@ -28,7 +29,7 @@ public class AuthController {
     @Autowired
     private EmployeeService employeeService;
     @Autowired
-    private AppUserDetailsService userDetailsService;
+    private EmpUserDetailsService userDetailsService;
     @Autowired
     private JwtServices jwtServices;
 

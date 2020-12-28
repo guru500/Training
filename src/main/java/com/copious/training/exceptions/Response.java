@@ -1,7 +1,5 @@
 package com.copious.training.exceptions;
 
-import org.springframework.http.HttpStatus;
-
 public class Response {
 
     private String message;

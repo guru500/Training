@@ -1,21 +1,22 @@
 package com.copious.training.scheduler;
 
-import com.copious.training.service.EmployeeService;
+import com.copious.training.repository.EmployeeDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.concurrent.ExecutionException;
 
-@Component
+//@Component
 public class BirthdayWishScheduler {
     @Autowired
-    EmployeeService employeeService;
+    EmployeeDao employeeDao;
 
-    @Scheduled(cron = "0 0 1 * * *")
-    public void sendBirthdayWish() {
+    //    @Scheduled(cron = "0 0 1 * * *")
+    @Scheduled(fixedRate = 10000)
+    public void sendBirthdayWish() throws ExecutionException, InterruptedException {
         LocalDate currentDate = LocalDate.now();
-        employeeService.sortByAge().stream().filter(p -> p.getDob().getMonth().equals(currentDate.getMonth())
+        employeeDao.getEmployees().stream().filter(p -> p.getDob().getMonth().equals(currentDate.getMonth())
                 && p.getDob().getDayOfMonth() == currentDate.getDayOfMonth()).
                 forEach(p -> System.out.println("Happy birthday " + p.getName()));
     }

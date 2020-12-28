@@ -14,8 +14,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(EmployeeNotFoundException.class)
     public ResponseEntity<Object> handleEmployeeNotFoundException(EmployeeNotFoundException ex, WebRequest request) {
 
-        Response response = new Response();
-        response.setMessage(ex.getErrorMessage());
+        Response response = new Response(ex.getErrorMessage(), ex.getErrorCode().name());
 
         GenericResponse<Response> genericResponse = new GenericResponse<>(false, ex.getErrorCode().name(), response);
 

@@ -10,14 +10,14 @@ public class GenericResponse<T> implements Serializable {
 
     private transient T payload;
 
-    public GenericResponse(Boolean isSuccessful, String httpStaus) {
+    public GenericResponse(Boolean isSuccessful, String httpStatus) {
         this.isSuccessful = isSuccessful;
-        this.httpStatus = httpStaus;
+        this.httpStatus = httpStatus;
     }
 
-    public GenericResponse(Boolean isSuccessful, String httpStaus, T payload) {
+    public GenericResponse(Boolean isSuccessful, String httpStatus, T payload) {
         this.isSuccessful = isSuccessful;
-        this.httpStatus = httpStaus;
+        this.httpStatus = httpStatus;
         this.payload = payload;
     }
 

@@ -12,7 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Api(value = "Control employees details.")
 @RestController
@@ -30,10 +30,20 @@ public class EmployeeController {
             @ApiResponse(code = 500, message = "Something went wrong, Internal server error")
     })
     @GetMapping("/get-employees")
-    public ResponseEntity<GenericResponse<Object>> getEmployee() throws EmployeeNotFoundException {
-        List<Employee> empList = employeeService.sortByAge();
+    public ResponseEntity<GenericResponse<Object>> getEmployee() throws EmployeeNotFoundException, ExecutionException
+            , InterruptedException {
 
-        return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(), employeeService.sortByAge()),
+
+        return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(),
+                employeeService.pairOldAndYoungEmployee()),
+                HttpStatus.OK);
+    }
+
+    @GetMapping("/sequential")
+    public ResponseEntity<GenericResponse<Object>> sequential() throws EmployeeNotFoundException {
+
+        return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(),
+                employeeService.sequential()),
                 HttpStatus.OK);
     }
 
@@ -48,9 +58,9 @@ public class EmployeeController {
     @PostMapping("/emp-filter")
     public ResponseEntity<GenericResponse<Object>> getEmployee(
             @ApiParam(name = "lowerAgeLimit", value = "Lower age limit of employee.", required = true)
-            @RequestParam("lowerAgeLimit") int lowerAgeLimit,
+            @RequestParam("lowerAgeLimit") Integer lowerAgeLimit,
             @ApiParam(name = "upperAgeLimit", value = "Upper age limit of employee.", required = true)
-            @RequestParam("upperAgeLimit") int upperAgeLimit,
+            @RequestParam("upperAgeLimit") Integer upperAgeLimit,
             @ApiParam(name = "gender", value = "Gender of employee.", example =
                     "Male/Female", required = true)
             @RequestParam("gender") FilterCriteria gender) throws EmployeeNotFoundException {

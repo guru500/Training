@@ -1,6 +1,6 @@
 package com.copious.training.security;
 
-import com.copious.training.service.AppUserDetailsService;
+import com.copious.training.service.EmpUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,14 +18,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebConfigurations extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private AppUserDetailsService appUserDetailsService;
+    private EmpUserDetailsService empUserDetailsService;
 
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(appUserDetailsService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(empUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean
@@ -52,8 +52,14 @@ public class WebConfigurations extends WebSecurityConfigurerAdapter {
                 .authenticated().and().exceptionHandling().and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-        //httpSecurity.requiresChannel().anyRequest().requiresSecure();
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
     }
+   /* @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http.csrf()
+                .disable()
+                .headers().frameOptions().deny().cacheControl().disable()
+                .httpStrictTransportSecurity().and().xssProtection().block(false);
+    }*/
 }

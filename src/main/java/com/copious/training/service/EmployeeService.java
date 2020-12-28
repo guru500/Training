@@ -5,11 +5,15 @@ import com.copious.training.model.Employee;
 import com.copious.training.util.FilterCriteria;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 public interface EmployeeService {
 
-    List<Employee> sortByAge() throws EmployeeNotFoundException;
+    Map<String, List<Employee>> pairOldAndYoungEmployee() throws EmployeeNotFoundException, ExecutionException, InterruptedException;
+
+    Map<String, List<Employee>> sequential() throws EmployeeNotFoundException;
 
     Optional<Employee> getUserByUserName(String userName) throws EmployeeNotFoundException;
 
