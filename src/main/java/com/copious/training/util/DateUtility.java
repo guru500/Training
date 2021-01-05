@@ -51,12 +51,12 @@ public class DateUtility {
         return date == null ? LocalDate.now() : date;
     }
 
-    public static void compareDates(LocalDate effectiveFrom, LocalDate effectiveTo) {
+    public static boolean compareDates(LocalDate effectiveFrom, LocalDate effectiveTo) {
 
         if (effectiveTo.isBefore(effectiveFrom)) {
-            throw new RuntimeException();
+            return false;
         } else {
-            System.out.println("Success");
+            return true;
         }
     }
 }

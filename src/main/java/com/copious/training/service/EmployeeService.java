@@ -20,4 +20,6 @@ public interface EmployeeService {
     List<Employee> filterEmployee(int lowerAgeLimit, int upperAgeLimit, FilterCriteria gender) throws EmployeeNotFoundException;
 
     List<Employee> genderFilter(FilterCriteria criteria);
+
+    List<Employee> sortEmployees();
 }

@@ -24,6 +24,9 @@ public class WebConfigurations extends WebSecurityConfigurerAdapter {
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
+    private FilterExceptionHandler exceptionHandler;
+
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(empUserDetailsService).passwordEncoder(passwordEncoder());
     }
@@ -53,8 +56,9 @@ public class WebConfigurations extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-
+        httpSecurity.addFilterBefore(exceptionHandler, JwtRequestFilter.class);
     }
+
    /* @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()

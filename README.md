@@ -28,6 +28,4 @@ Repository for training purpose.
 3. Singleton pattern in java vs spring singleton scope.
 4. Scheduler and LoacalDateTime implementation for birthday wish to emplyees.
 
-#4 Dec 2020
-1. Writing test cases for services using Mockito.
-2. Understanding mockito and challenges with parameterized tests.
+o

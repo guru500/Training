@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 
 @Api(value = "Control employees details.")
 @RestController
-@RequestMapping(value = "/employee")
+@RequestMapping("/employee")
 public class EmployeeController {
 
     @Autowired
@@ -85,6 +85,21 @@ public class EmployeeController {
 
         return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(),
                 employeeService.genderFilter(gender)),
+                HttpStatus.OK);
+    }
+
+    @ApiOperation(value = "Sort employee details.", notes = "Sort by name and then salary.", response =
+            Employee.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Successful sorting employee details."),
+            @ApiResponse(code = 404, message = "Employee details not found."),
+            @ApiResponse(code = 500, message = "Something went wrong, Internal server error")
+    })
+    @PostMapping("/sort-employee")
+    public ResponseEntity<GenericResponse<Object>> sortEmployees() throws EmployeeNotFoundException {
+
+        return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(),
+                employeeService.sortEmployees()),
                 HttpStatus.OK);
     }
 }

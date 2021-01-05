@@ -45,6 +45,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     }
 
+    @ExceptionHandler(DbConfigException.class)
+    public ResponseEntity<Object> handleDbResException(DbConfigException ex, WebRequest request) {
+
+        Response response = new Response();
+        response.setMessage(ex.getErrorMessage());
+        response.setStatus(ex.getErrorCode().name());
+
+        GenericResponse<Response> genericResponse = new GenericResponse<>(false, ex.getErrorCode().name(), response);
+
+        return handleExceptionInternal(ex, genericResponse, new HttpHeaders(), ex.getErrorCode(), request);
+
+    }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleAllException(Exception ex, WebRequest request) {

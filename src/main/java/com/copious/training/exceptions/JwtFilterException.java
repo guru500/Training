@@ -3,13 +3,13 @@ package com.copious.training.exceptions;
 import com.copious.training.util.EnumExceptions;
 import org.springframework.http.HttpStatus;
 
-public class DbConfigException extends RuntimeException {
+public class JwtFilterException extends RuntimeException {
 
     private HttpStatus errorCode;
 
     private String errorMessage;
 
-    public DbConfigException(EnumExceptions exceptions) {
+    public JwtFilterException(EnumExceptions exceptions) {
         this.errorCode = exceptions.getStatusCode();
         this.errorMessage = exceptions.getMessage();
     }

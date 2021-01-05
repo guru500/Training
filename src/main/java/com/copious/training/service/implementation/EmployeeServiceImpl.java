@@ -1,9 +1,10 @@
-package com.copious.training.service;
+package com.copious.training.service.implementation;
 
 import com.copious.training.exceptions.EmployeeNotFoundException;
 import com.copious.training.factory.EmployeeFactory;
 import com.copious.training.model.Employee;
 import com.copious.training.repository.EmployeeDaoImpl;
+import com.copious.training.service.EmployeeService;
 import com.copious.training.util.EnumExceptions;
 import com.copious.training.util.FilterCriteria;
 import com.copious.training.util.Param;
@@ -12,10 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Predicate;
@@ -117,5 +115,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<Employee> genderFilter(FilterCriteria criteria) {
         return employeeFactory.employeeFilter(criteria).getEmployees(employeeDao.getEmployees());
+    }
+
+    @Override
+    public List<Employee> sortEmployees() {
+        List<Employee> employeeList = employeeDao.getEmployees();
+        employeeList.sort(Comparator.comparing(Employee::getName).thenComparing(Employee::getSalary));
+        return employeeList;
     }
 }

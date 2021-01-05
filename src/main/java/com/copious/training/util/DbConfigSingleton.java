@@ -12,7 +12,7 @@ public final class DbConfigSingleton {
 
     private static DbConfigSingleton dbConfigInstance = null;
     @Autowired
-    LoadConfig config;
+    private LoadConfig config;
     private Properties props;
 
     private DbConfigSingleton() {

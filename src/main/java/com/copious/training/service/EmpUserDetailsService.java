@@ -15,7 +15,6 @@ public class EmpUserDetailsService implements UserDetailsService {
     @Autowired
     EmployeeDao employeeDao;
 
-
     @Override
     public UserDetails loadUserByUsername(String username) {
         Employee employee = new Employee();

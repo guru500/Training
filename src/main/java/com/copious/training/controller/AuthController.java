@@ -3,10 +3,10 @@ package com.copious.training.controller;
 import com.copious.training.exceptions.CredentialException;
 import com.copious.training.exceptions.GenericResponse;
 import com.copious.training.model.Employee;
-import com.copious.training.security.JwtServices;
 import com.copious.training.service.EmpUserDetailsService;
 import com.copious.training.service.EmployeeService;
 import com.copious.training.util.EnumExceptions;
+import com.copious.training.util.JwtUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -16,14 +16,16 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@CrossOrigin
 @Api(value = "Employee login control.")
 @RestController
-@RequestMapping("/login")
+@RequestMapping(value = "/login")
 public class AuthController {
 
     @Autowired
@@ -31,7 +33,7 @@ public class AuthController {
     @Autowired
     private EmpUserDetailsService userDetailsService;
     @Autowired
-    private JwtServices jwtServices;
+    private JwtUtils jwtServices;
 
     @ApiOperation(value = "Authenticate users.", notes = "Authenticate users and return jwt token.",
             response = Employee.class)
@@ -41,7 +43,7 @@ public class AuthController {
             @ApiResponse(code = 404, message = "User with entered user name does not exists."),
             @ApiResponse(code = 500, message = "Something went wrong, Internal server error")
     })
-    @RequestMapping(value = "/authenticate", method = RequestMethod.POST)
+    @PostMapping("/authenticate")
     public ResponseEntity<GenericResponse<Object>> createAuthenticationToken(
             @RequestParam(value = "userName") String userName,
             @RequestParam(value = "userPassword") String userPassword) {
@@ -50,11 +52,8 @@ public class AuthController {
 
         if (employee.isPresent()) {
             if (employee.get().getPassword().equals(userPassword)) {
-                Employee empDetails = new Employee();
                 final UserDetails userDetails = userDetailsService.loadUserByUsername(userName);
-                final String jwt = jwtServices.generateToken(userDetails);
-                HttpHeaders responseHeader = new HttpHeaders();
-                responseHeader.set("jwt-token", jwt);
+                HttpHeaders responseHeader = getHttpHeaders(userDetails);
 
                 return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(), employee.get()),
                         responseHeader, HttpStatus.OK);
@@ -65,6 +64,15 @@ public class AuthController {
             throw new CredentialException(EnumExceptions.USER_NOT_FOUND);
         }
     }
+
+    private HttpHeaders getHttpHeaders(UserDetails userDetails) {
+        final String jwt = jwtServices.generateToken(userDetails);
+        HttpHeaders responseHeader = new HttpHeaders();
+        responseHeader.set("jwt-token", jwt);
+        return responseHeader;
+    }
+
+
 }
 
 

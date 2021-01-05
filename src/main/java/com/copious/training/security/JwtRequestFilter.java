@@ -1,6 +1,9 @@
 package com.copious.training.security;
 
+import com.copious.training.exceptions.JwtFilterException;
 import com.copious.training.service.EmpUserDetailsService;
+import com.copious.training.util.EnumExceptions;
+import com.copious.training.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,40 +26,49 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private EmpUserDetailsService userDetailsService;
 
     @Autowired
-    private JwtServices jwtUtil;
+    private JwtUtils jwtUtil;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-            throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) {
 
-        final String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        try {
+            final String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
 
-        String username = null;
-        String jwt = null;
-        if (!request.getRequestURL().toString().contains("/login") || request.getMethod() != "OPTIONS") {
+            String username = null;
+            String jwt = null;
+            if (!request.getRequestURL().toString().contains("/login") || request.getMethod() != "OPTIONS") {
 
-            if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-                jwt = authorizationHeader.substring(7);
-                username = jwtUtil.extractUsername(jwt);
-            }
-
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-                UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
-
-                if (jwtUtil.validateToken(jwt, userDetails)) {
-
-                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-                            new UsernamePasswordAuthenticationToken(
-                                    userDetails, null, userDetails.getAuthorities());
-                    usernamePasswordAuthenticationToken
-                            .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+                    jwt = authorizationHeader.substring(7);
+                    try {
+                        username = jwtUtil.extractUsername(jwt);
+                    } catch (Exception ex) {
+                        throw new JwtFilterException(EnumExceptions.MALFORMED_TOKEN);
+                    }
                 }
+
+                if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+
+                    UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
+
+                    if (jwtUtil.validateToken(jwt, userDetails)) {
+
+                        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                                new UsernamePasswordAuthenticationToken(
+                                        userDetails, null, userDetails.getAuthorities());
+                        usernamePasswordAuthenticationToken
+                                .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                    } else {
+                        throw new JwtFilterException(EnumExceptions.INVALID_TOKEN);
+                    }
+                }
+                chain.doFilter(request, response);
+            } else {
+                chain.doFilter(request, response);
             }
-            chain.doFilter(request, response);
-        } else {
-            chain.doFilter(request, response);
+        } catch (IOException | ServletException e) {
+            throw new JwtFilterException(EnumExceptions.JWT_REQUEST_EXCEPTION);
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.copious.training.security;
+package com.copious.training.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 @Service
-public class JwtServices {
+public class JwtUtils {
 
     private String SECRET_KEY = "secret";
 

@@ -22,10 +22,10 @@ import java.util.List;
 public class EmployeeDaoImpl implements EmployeeDao {
 
     @Autowired
-    Gson gson;
+    private Gson gson;
 
     @Value("classpath:employee.json")
-    Resource resourceFile;
+    private Resource resourceFile;
 
     @Override
     public List<Employee> getEmployees() throws EmployeeNotFoundException {

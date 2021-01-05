@@ -5,7 +5,7 @@ import com.copious.training.factory.EmployeeFemale;
 import com.copious.training.factory.EmployeeMale;
 import com.copious.training.model.Employee;
 import com.copious.training.repository.EmployeeDaoImpl;
-import com.copious.training.service.EmployeeServiceImpl;
+import com.copious.training.service.implementation.EmployeeServiceImpl;
 import com.copious.training.util.FilterCriteria;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static com.copious.training.TestHelperMethods.loadMockEmployees;
-import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

@@ -15,6 +15,7 @@ public class CustomProperties {
     @Value("${year}")
     private Integer year;
 
+
     @Bean
     public void loadedProperties() throws Exception {
         System.out.println("name: " + name + " &" + "year : " + year);

@@ -1,14 +1,17 @@
 package com.copious.training;
 
-import com.google.gson.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
-import java.lang.reflect.Type;
 import java.time.LocalDate;
 
+@CrossOrigin
 @EnableScheduling
 @SpringBootApplication
 public class TrainingApplication {
@@ -19,12 +22,8 @@ public class TrainingApplication {
 
     @Bean
     public Gson gson() {
-        return new GsonBuilder().registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
-            @Override
-            public LocalDate deserialize(JsonElement jsonElement, Type type,
-                                         JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
-                return LocalDate.parse(jsonElement.getAsJsonPrimitive().getAsString());
-            }
-        }).create();
+        return new GsonBuilder().registerTypeAdapter(LocalDate.class, (JsonDeserializer<LocalDate>)
+                (jsonElement, type,
+                 jsonDeserializationContext) -> LocalDate.parse(jsonElement.getAsJsonPrimitive().getAsString())).create();
     }
 }
