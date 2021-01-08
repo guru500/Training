@@ -1,9 +1,12 @@
 package com.copious.training.exceptions;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.io.Serializable;
 
 public class GenericResponse<T> implements Serializable {
 
+    @JsonProperty(value = "isSuccessful")
     private final Boolean isSuccessful;
 
     private final String httpStatus;
@@ -35,5 +38,14 @@ public class GenericResponse<T> implements Serializable {
 
     public void setPayload(T payload) {
         this.payload = payload;
+    }
+
+    @Override
+    public String toString() {
+        return "GenericResponse{" +
+                "isSuccessful=" + isSuccessful +
+                ", httpStatus='" + httpStatus + '\'' +
+                ", payload=" + payload +
+                '}';
     }
 }

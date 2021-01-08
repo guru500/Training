@@ -90,4 +90,17 @@ public class Employee {
         this.password = password;
     }
 
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", salary=" + salary +
+                ", age=" + age +
+                ", dob=" + dob +
+                ", gender='" + gender + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
 }

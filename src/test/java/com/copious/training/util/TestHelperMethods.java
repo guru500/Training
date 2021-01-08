@@ -1,4 +1,4 @@
-package com.copious.training;
+package com.copious.training.util;
 
 import com.copious.training.model.Employee;
 

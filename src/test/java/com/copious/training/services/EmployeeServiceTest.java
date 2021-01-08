@@ -1,4 +1,4 @@
-package com.copious.training;
+package com.copious.training.services;
 
 import com.copious.training.factory.EmployeeFactory;
 import com.copious.training.factory.EmployeeFemale;
@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.copious.training.TestHelperMethods.loadMockEmployees;
+import static com.copious.training.util.TestHelperMethods.loadMockEmployees;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 

@@ -1,0 +1,50 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "title": "EmployeeJson",
+  "description": "Details of employees",
+  "properties": {
+    "employeeId": {
+      "description": "Primary key for employee object.",
+      "type": "integer"
+    },
+    "employeeName": {
+      "description": "Employees name.",
+      "type": "string"
+    },
+    "userName": {
+      "description": "Username for employee",
+      "type": "string",
+      "minLength": 10,
+      "maxLength": 20
+    },
+    "password": {
+      "description": "Password for login.",
+      "type": "string",
+      "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$"
+    },
+    "gender": {
+      "description": "Gender of employee",
+      "type": "string",
+      "enum": [
+        "MALE",
+        "FEMALE"
+      ]
+    },
+    "assetsHolding": {
+      "description": "Assets held by employee",
+      "type": "array",
+      "items": {
+        "$ref": "asset.json#/definitions/asset"
+      }
+    }
+  },
+  "required": [
+    "employeeId",
+    "employeeName",
+    "userName",
+    "password",
+    "gender",
+    "assetsHolding"
+  ]
+}

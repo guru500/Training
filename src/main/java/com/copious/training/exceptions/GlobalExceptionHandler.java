@@ -67,6 +67,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         GenericResponse<Response> genericResponse = new GenericResponse<>(false,
                 HttpStatus.INTERNAL_SERVER_ERROR.name(), response);
 
+        ex.printStackTrace();
         return handleExceptionInternal(ex, genericResponse, new HttpHeaders(),
                 HttpStatus.INTERNAL_SERVER_ERROR, request);
     }

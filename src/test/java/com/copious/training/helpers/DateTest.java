@@ -1,4 +1,4 @@
-package com.copious.training;
+package com.copious.training.helpers;
 
 import com.copious.training.util.DateUtility;
 import org.joda.time.LocalDate;

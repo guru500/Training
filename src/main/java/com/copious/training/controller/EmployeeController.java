@@ -95,7 +95,7 @@ public class EmployeeController {
             @ApiResponse(code = 404, message = "Employee details not found."),
             @ApiResponse(code = 500, message = "Something went wrong, Internal server error")
     })
-    @PostMapping("/sort-employee")
+    @GetMapping("/sort-employee")
     public ResponseEntity<GenericResponse<Object>> sortEmployees() throws EmployeeNotFoundException {
 
         return new ResponseEntity<>(new GenericResponse<>(true, HttpStatus.OK.name(),
