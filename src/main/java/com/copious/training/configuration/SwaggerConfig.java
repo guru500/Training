@@ -3,6 +3,7 @@ package com.copious.training.configuration;
 import com.google.common.collect.Lists;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpHeaders;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 
 @Configuration
 @EnableSwagger2
+//@Profile("local")
 public class SwaggerConfig {
 
     public static final String AUTHORIZATION_HEADER = HttpHeaders.AUTHORIZATION;

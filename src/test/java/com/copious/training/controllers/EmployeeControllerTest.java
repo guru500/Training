@@ -7,7 +7,6 @@ import com.copious.training.service.EmployeeService;
 import com.copious.training.util.FilterCriteria;
 import com.copious.training.util.Response;
 import com.copious.training.util.UtilityMethods;
-import com.google.gson.Gson;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -80,7 +79,7 @@ public class EmployeeControllerTest {
         requestParams.add("gender", "MALE");
 
         MvcResult mvcResult = mockMvc.perform(post("/employee/emp-filter")
-                .params(requestParams)
+                .params(requestParams) 
                 .accept(MediaType.APPLICATION_JSON)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
